@@ -3,10 +3,9 @@ var server = require('./config/dev-server')
 let mongoose = require('mongoose')
 let connection = mongoose.connection;
 
-
 // Establishes MongoDb Connection
 mongoose.connect(process.env.CONNECTIONSTRING, {
-	useMongoClient: true,
+	useMongoClient: true,  //new change from MongoDb
 	keepAlive: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }
 });
 

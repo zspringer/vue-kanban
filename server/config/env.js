@@ -4,9 +4,9 @@ let env = {
 	PORT: 3000,
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'student',
-	DBPASSWORD: 'CodeWorksStudent',
-	DBHOST: 'ds056789.mlab.com:56789',
-	DBNAME: 'codeworks',
+	DBPASSWORD: 'student',
+	DBHOST: 'ds149743.mlab.com:49743',
+	DBNAME: 'kanban',
 	SERVERNAME: 'dev-server'
 }
 
