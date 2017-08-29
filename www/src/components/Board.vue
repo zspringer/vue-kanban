@@ -1,6 +1,9 @@
 <template>
   <div> 
+    <!-- add any other embellishments here -->
     Active Board: {{board}}
+
+     <li v-for="lists in board"><router-link :to="'/lists/'+list._id">{{list.name}}</router-link> <span @click="removeList(list)">x</span></li>
   </div>
 </template>
 
