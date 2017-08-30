@@ -1,33 +1,6 @@
 <template>
   <div id="app">
 
-    <!-- <div class="row firstRow">
-      <div class="col-xs-1"></div>
-
-      <div class="col-xs-2">
-        <input type="text" placeholder="email" v-model="accountUser.email">
-        <input type="text" placeholder="password" v-model="accountUser.password">
-        <button type="submit" class="btn" @click="login()">log in</button><br>
-        <button @click="logOut()">Log Out</button>
-      </div>
-
-      <div class="col-xs-3">
-        <input type="text" placeholder="name" v-model="accountUser.name">
-        <input type="text" placeholder="email" v-model="accountUser.email">
-        <input type="text" placeholder="password" v-model="accountUser.password">
-        <button type="submit" class="btn" @click="register()">Submit</button>
-      </div>
-
-      <div class="col-xs-3">
-        <div>{{username}} is Logged In</div>
-      </div>
-
-      <div class="col-xs-2">
-      </div>
-
-      <div class="col-xs-1"></div>
-    </div> -->
-
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -113,9 +86,7 @@
     },
 
     mounted() {
-      //this.checkForUser()
-      //req.session.uid    //this.accountUser
-      this.$store.dispatch('authenticate')
+      //this.$store.dispatch('authenticate')
     },
 
     methods: {

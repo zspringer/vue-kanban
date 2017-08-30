@@ -10,12 +10,12 @@
     <div v-if="boardCreate" class="row">
         <input type="text" placeholder="name" v-model="newboard.name">
         <input type="text" placeholder="description" v-model="newboard.description">   
-        <button type="submit" class="btn" @click.prevent="createBoard">Submit</button>
+        <button type="submit" class="btn" @click="createBoard">Submit</button>
     </div>
 
     <ul>
-      <li v-for="board in boards">
-        <router-link :to="'/boards/'+ board._id">{{board.name}} <button @click.prevent="removeBoard(board)">X</button></router-link>
+      <li v-for="board in boards" style="list-style: none">
+        <router-link :to="'/boards/'+board._id">{{board.name}}<button @click="removeBoard(board)">X</button></router-link>
       </li>
     </ul>
 
