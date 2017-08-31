@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- add any other embellishments here -->
+  <div class="wholeThing">
 
     Active Board: {{board.name}} <br/>Board Description: {{board.description}}
 
@@ -14,7 +13,6 @@
     </div>
 
     <div v-for="list in lists">
-      <!-- ///one list  -->
       <Lists :listProp='list'></Lists>
     </div>
 
@@ -39,7 +37,7 @@
     name: 'board',
 
     mounted() {
-      this.$store.dispatch('getBoard', this.$route.params.boardId),
+      this.$store.dispatch('getBoard', this.$route.params.boardId)
       this.$store.dispatch('getLists', this.$route.params.boardId)
     },
 
@@ -72,5 +70,7 @@
 </script>
 
 <style scoped>
-
+  .wholeThing{
+    overflow-y: auto;
+  }
 </style>

@@ -1,8 +1,6 @@
 <template>
-  <!-- <div>
-    <div class="card-deck "> -->
 
-  <div class="card">
+  <div class="card wholeThing">
     <div class="card-block">
       <button type="button" @click="removeTask(taskProp)" class="btn btn-primary glyphicon glyphicon-minus"></button>
       <p class="card-title">{{taskProp.name}} <br/> ({{taskProp.description}})</p>
@@ -18,14 +16,11 @@
     </div>
 
     <div v-for="comment in comments">
-      <!-- ///one task  -->
       <Comments :commentProp='comment'></Comments>
     </div>
 
   </div>
 
-  <!-- </div>
-  </div> -->
 </template>
 
 <script>
@@ -55,6 +50,10 @@
       // lists() {
       //   return this.$store.state.activeLists
       // }
+
+      comments() {
+        return this.$store.state.activeComments;
+      }
     },
 
     methods: {
@@ -76,5 +75,7 @@
 </script>
 
 <style scoped>
-
+  .wholeThing {
+    overflow-y: auto;
+  }
 </style>

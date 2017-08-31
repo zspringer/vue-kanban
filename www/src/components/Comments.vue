@@ -6,7 +6,7 @@
     <!-- <li v-for="comment in task"><router-link :to="'/comments/'+comment._id">{{comment.name}}</router-link> <span @click="removeComment(comment)">x</span></li>
    -->
 
-    <!-- <div class="card-deck ">
+    <!-- <div class="card-deck ">-->
 
       <div class="card">
         <div class="card-block">
@@ -15,7 +15,7 @@
         </div>
       </div>
 
-    </div> -->
+    <!--</div> -->
 </template>
 
 <script>

@@ -1,16 +1,6 @@
 <template>
-  <!-- <div> -->
-  <!-- <div>
-      <button @click="showListCreate">Add Task</button>
-      <div v-if="listCreate" class="row">
-        <input type="text" placeholder="name" v-model="newlist.name">
-        <input type="text" placeholder="description" v-model="newlist.description">
-        <button type="button" class="btn" @click.prevent.stop="createList">Submit</button>
-      </div>
-    </div> -->
-  <!-- <div class="card-deck "> -->
 
-  <div class="card">
+  <div class="card wholeThing">
     <div class="card-block">
       <button type="button" @click="removeList(listProp)" class="btn btn-primary glyphicon glyphicon-minus"></button>
       <p class="card-title">{{listProp.name}} <br/> ({{listProp.description}})</p>
@@ -26,13 +16,10 @@
     </div>
 
     <div v-for="task in tasks">
-      <!-- ///one task  -->
       <Tasks :taskProp='task'></Tasks>
     </div>
-
   </div>
-  <!-- </div> -->
-  <!-- </div> -->
+
 </template>
 
 <script>
@@ -46,35 +33,42 @@
     data() {
       return {
         taskCreate: false,
-        tasks: '',       //holy crap! this fixed the ' Property or method 'tasks' is not defined on the instance but referenced during render. '
         newtask: {
           name: '',
           description: '',
           boardId: this.$route.params.id
+          //listId: listProp._id    //we think
         }
       }
     },
 
+    components: {
+      Tasks
+    },
 
     mounted() {
       //  this.$store.dispatch('getTasks', {boardId: this.$route.params.id, listId: this.listProp._id})
       //  this.$store.dispatch('getBoard', this.$route.params.boardId),
       // this.$store.dispatch('getLists', this.$route.params.boardId),
-      this.$store.dispatch('getTasks', this.$route.params.boardId)
+
+        this.$store.dispatch('getBoard', this.$route.params.boardId),
+        this.$store.dispatch('getLists', this.$route.params.boardId),
+
+        this.$store.dispatch('getTasks', this.$route.params.boardId)
     },
 
     computed: {
-      // board() {
-      //   return this.$store.state.activeBoard
-      // },
       // lists() {
       //   return this.$store.state.activeLists
-      // }
+      // },
+      tasks() {
+        return this.$store.state.activeTasks;
+      }
     },
 
     methods: {
       removeList(list) {
-        console.log('fgg ', list)
+        //console.log('fgg ', list)
         this.$store.dispatch('removeList', list)
       },
 
@@ -91,6 +85,10 @@
 </script>
 
 <style scoped>
+  .wholeThing {
+    overflow-y: auto;
+  }
+
   .card {
     /* border-color: black; */
     background-color: gray;

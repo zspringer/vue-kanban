@@ -24,7 +24,9 @@ var store = new vuex.Store({
     activeBoard: {},
     error: {},
     activeUser: {},
-    activeLists: []
+    activeLists: [],
+    activeTasks: [],
+    activeComments: []
   },
 
   mutations: {
@@ -87,7 +89,7 @@ var store = new vuex.Store({
       /////////////////////////////////////////////////////////////////
       api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
         .then(res => {
-          commit('', res.data.data)
+          //commit('', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -109,7 +111,7 @@ var store = new vuex.Store({
       //debugger
       api.post('boards/', board)
         .then(res => {
-          console.log('getting boards now')
+          //console.log('getting boards now')
           dispatch('getBoards')
         })
         .catch(err => {
@@ -120,7 +122,7 @@ var store = new vuex.Store({
     createList({ commit, dispatch }, list) {
       api.post('lists', list)
         .then(res => {
-          console.log('Created list', res)
+          //console.log('Created list', res)
           dispatch('getLists', list.boardId)
         })
         .catch(err => {
@@ -246,7 +248,7 @@ var store = new vuex.Store({
 
             router.push('/app');
           }
-          router.push('/boards');
+          router.push('/'); //boards
           console.log('res.data' + res.data)
           commit('setUser', res.data.data)
         })
