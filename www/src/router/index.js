@@ -17,7 +17,7 @@ export default new Router({
       name: 'Boards',
       component: Boards
     },{
-      path: '/boards/:id',
+      path: '/boards/:boardId',
       name: 'Board',
       component: Board
     }

@@ -15,7 +15,7 @@
 
     <ul>
       <li v-for="board in boards" style="list-style: none">
-        <router-link :to="'/boards/'+board._id">{{board.name}}<button @click="removeBoard(board)">X</button></router-link>
+        <router-link :to="'/boards/'+board._id">{{board.name}}<button @click.prevent.stop="removeBoard(board)">X</button></router-link>
       </li>
     </ul>
 

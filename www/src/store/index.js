@@ -1,6 +1,7 @@
 import axios from 'axios'
 import vue from 'vue'
 import vuex from 'vuex'
+import router from '../router'
 
 let api = axios.create({
   baseURL: 'http://localhost:3000/api/',
@@ -22,7 +23,8 @@ var store = new vuex.Store({
     boards: [],
     activeBoard: {},
     error: {},
-    activeUser: {}
+    activeUser: {},
+    activeLists: []
   },
 
   mutations: {
@@ -31,19 +33,27 @@ var store = new vuex.Store({
       state.boards = data
     },
 
+    setLists(state, data) {
+      //console.log('boards: ' + data)
+      state.activeLists = data
+    },
+
+
     setUser(state, data) {
       //console.log('test1: ' + data)
       state.activeUser = data
     },
 
     setActiveBoard(state, data) {
-      console.log('setting aCTIVE BOARD: ' + data);
+      //console.log('setting aCTIVE BOARD: ' + data);
       state.activeBoard = data
     },
 
     handleError(state, err) {
       state.error = err
-    },
+    }
+
+
 
   },
   actions: {
@@ -60,17 +70,40 @@ var store = new vuex.Store({
         })
     },
 
+    getLists({ commit, dispatch }, id) {
+      api('/boards/' + id + '/lists')
+        .then(res => {
+          console.log('List response', res)
+          commit('setLists', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    getTasks({ commit, dispatch }, task) {
+      console.log('task: ' + task.boardId + '  lid: ' + task.listId)
+      
+      /////////////////////////////////////////////////////////////////
+      api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
+        .then(res => {
+          commit('', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
     getBoard({ commit, dispatch }, id) {
-      console.log('made it this far')
       api('boards/' + id)
         .then(res => {
-          console.log('Checking setactiveboard ' + res.data.data)
           commit('setActiveBoard', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
+
 
     createBoard({ commit, dispatch }, board) {
       //debugger
@@ -85,14 +118,20 @@ var store = new vuex.Store({
     },
 
     createList({ commit, dispatch }, list) {
-      //debugger
-      var x = store.state.activeBoard.id;
-      console.log(x)
-
-      api.post('boards/' + store.state.activeBoard._id +'/Lists/', list)
+      api.post('lists', list)
         .then(res => {
-          console.log('getting lists now')
-          dispatch('getLists')
+          console.log('Created list', res)
+          dispatch('getLists', list.boardId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    createTask({ commit, dispatch }, task) {
+      api.post('tasks', task)
+        .then(res => {
+          dispatch('getTasks', task)
         })
         .catch(err => {
           commit('handleError', err)
@@ -112,7 +151,9 @@ var store = new vuex.Store({
     removeList({ commit, dispatch }, list) {
       api.delete('lists/' + list._id)
         .then(res => {
-          dispatch('getLists')
+
+
+          dispatch('getLists', list.boardId)
         })
         .catch(err => {
           commit('handleError', err)
@@ -146,7 +187,7 @@ var store = new vuex.Store({
       auth.post('login', accountUser)
         .then(res => {
           commit('setUser', res.data.data)
-          console.log(res.data.data.name);
+          //console.log(res.data.data.name);
           dispatch('getBoards')
         })
         .catch(err => {
@@ -159,7 +200,7 @@ var store = new vuex.Store({
       auth.delete('logout', accountUser)
         .then(res => {
           //commit('setBoards', res.data.data)
-          commit('setUser',{})
+          commit('setUser', {})
           dispatch('getBoards')
         })
         .catch(err => {
@@ -172,13 +213,15 @@ var store = new vuex.Store({
       auth.get('authenticate')
         .then(res => {
           if (!res.data.data) {
-            
+
             router.push('/app');
           }
           router.push('/boards');
+          console.log('res.data' + res.data)
           commit('setUser', res.data.data)
         })
         .catch(err => {
+          console.log('err ' + err)
           // commit('setUser', 'Nobody')
           dispatch('getBoards')
           commit('handleError', err)
