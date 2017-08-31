@@ -15,17 +15,17 @@ const models = {
   list: {
     name: 'List',
     endpoint: 'lists',
-    useCustomRoutes: true
+    useCustomRoutes: false
   },
   task: {
     name: 'Task',
     endpoint: 'tasks',
-    useCustomRoutes: true
+    useCustomRoutes: false
   },
   comment: {
     name: 'Comment',
     endpoint: 'comments',
-    useCustomRoutes: true
+    useCustomRoutes: false
   },
   user: {
     name: 'User',

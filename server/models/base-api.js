@@ -17,7 +17,7 @@ function API(model, schema) {
     var params = req.params.id ? req.params : {};
     var query = req.query.with || '';
     console.log(query)
-
+    
     if (id) {
       schema.findById(id)
         .populate(query)
