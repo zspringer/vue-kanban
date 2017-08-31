@@ -76,6 +76,17 @@
 
 <style scoped>
   .wholeThing {
-    overflow-y: auto;
+    overflow-y: scroll;
+  }
+
+  .card {
+    /* border-color: black; */
+    /* 225px */
+    background-color: gray;
+    width: 215px;
+    text-align: center;
+    float: left;
+    margin: 5px;
+    padding: 5px;
   }
 </style>

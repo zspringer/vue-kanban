@@ -47,20 +47,13 @@
     },
 
     mounted() {
-      //  this.$store.dispatch('getTasks', {boardId: this.$route.params.id, listId: this.listProp._id})
-      //  this.$store.dispatch('getBoard', this.$route.params.boardId),
-      // this.$store.dispatch('getLists', this.$route.params.boardId),
-
-      this.$store.dispatch('getBoard', this.$route.params.boardId),
-        this.$store.dispatch('getLists', this.$route.params.boardId),
-
-        this.$store.dispatch('getTasks', this.newtask.listId)
+      this.$store.dispatch('getTasks', { boardId: this.listProp.boardId, listId: this.listProp._id })
     },
 
     computed: {
-      // lists() {
-      //   return this.$store.state.activeLists
-      // },
+      lists() {
+        return this.$store.state.activeLists
+      },
       tasks() {
         return this.$store.state.activeTasks[this.listProp._id];
       }
@@ -68,7 +61,6 @@
 
     methods: {
       removeList(list) {
-        //console.log('fgg ', list)
         this.$store.dispatch('removeList', list)
       },
 
@@ -89,15 +81,17 @@
 <style scoped>
   .wholeThing {
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .card {
     /* border-color: black; */
+    /* 225px */
     background-color: gray;
     width: 225px;
     text-align: center;
     float: left;
-    margin: 20px;
+    margin: 5px;
     padding: 5px;
   }
 </style>
