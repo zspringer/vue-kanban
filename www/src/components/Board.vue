@@ -72,5 +72,6 @@
 <style scoped>
   .wholeThing{
     overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>

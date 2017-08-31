@@ -84,7 +84,7 @@
         this.newcomment.listId = listId;
         this.newcomment.taskId = taskId;
 
-        console.log('whole comment: ', this.newcomment)
+        console.log('created comment User is: ', this.$store.state.activeUser.name)
 
         this.$store.dispatch('createComment', this.newcomment);
       }
@@ -94,9 +94,9 @@
 </script>
 
 <style scoped>
-  .wholeThing {
+  /* .wholeThing {
     overflow-y: scroll;
-  }
+  } */
 
   .card {
     /* border-color: black; */

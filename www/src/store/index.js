@@ -34,18 +34,23 @@ var store = new vuex.Store({
       state.boards = data
     },
 
-    setLists(state, data) { ///create object {listId, task}
+    setLists(state, data) { 
       state.activeLists = data
     },
 
-    setTasks(state, data) {
+
+    setTasks(state, data) {///create object {listId, task}
       //console.log('boards: ' + data)
       // state.activeTasks[data[0].listId] = data
-      vue.set(state.activeTasks, data[0].listId, data)
+      //vue.set(state.activeTasks, data[0].listId, data)
+      console.log('data: ', data)
+      vue.set(state.activeTasks, data.listId, data.tasks)
     },
 
+
     setComments(state, data) {
-      vue.set(state.activeComments, data[0].taskId, data)
+      //vue.set(state.activeComments, data[0].taskId, data)
+      vue.set(state.activeComments, data.taskId, data.comments)
     },
 
 
@@ -72,7 +77,7 @@ var store = new vuex.Store({
     getBoards({ commit, dispatch }) {
       api('userboards')
         .then(res => {
-          console.log(res)
+          //console.log(res)
           commit('setBoards', res.data.data)
         })
         .catch(err => {
@@ -83,7 +88,7 @@ var store = new vuex.Store({
     getLists({ commit, dispatch }, id) {
       api('/boards/' + id + '/lists')
         .then(res => {
-          console.log('List response', res)
+          //console.log('List response', res)
           commit('setLists', res.data.data)
         })
         .catch(err => {
@@ -93,15 +98,13 @@ var store = new vuex.Store({
 
     getTasks({ commit, dispatch }, task) {
 
-      //console.log(' TTask listId is: ' + task.listId)
-
       api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
       
         .then(res => {
 
-          console.log('getTasks response: ', res)
+          var payload={ "listId":task.listId, "tasks":res.data.data}
 
-          commit('setTasks', res.data.data)
+          commit('setTasks', payload)
         })
         .catch(err => {
           commit('handleError', err)
@@ -109,16 +112,14 @@ var store = new vuex.Store({
     },
 
     getComments({ commit, dispatch }, comment) {
-
-      //console.log(' TTask listId is: ' + task.listId)
-
       api('/boards/' + comment.boardId + '/lists/' + comment.listId + "/tasks/" + comment.taskId + "/comments")
       
         .then(res => {
 
-          console.log('getComments response: ', res) //good to here. Data present.
+         // console.log('getComments response: ', res) //good to here. Data present.
 
-          commit('setComments', res.data.data)
+         var payload={ "taskId":comment.taskId, "comments":res.data.data}
+          commit('setComments', payload)
         })
         .catch(err => {
           commit('handleError', err)

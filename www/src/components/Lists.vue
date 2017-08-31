@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card wholeThing">
+  <div class="card wholeThing2">
     <div class="card-block">
       <button type="button" @click="removeList(listProp)" class="btn btn-primary glyphicon glyphicon-minus"></button>
       <p class="card-title">{{listProp.name}} <br/> ({{listProp.description}})</p>
@@ -15,15 +15,25 @@
       </div>
     </div>
 
-    <div v-for="task in tasks">
-      <Tasks :taskProp='task'></Tasks>
-    </div>
+
+
+    <draggable v-model="tasks" :options="{group:'taskItems', draggable:'.item'}" class="dragArea">
+      <!-- <transition-group> -->
+        <div :key="task._id" v-for="task in tasks" class="item">
+          <Tasks :taskProp='task'></Tasks>
+        </div>
+      <!-- </transition-group> -->
+    </draggable>
+
+
+
   </div>
 
 </template>
 
 <script>
   import Tasks from './Tasks'
+  import draggable from 'vuedraggable'
 
   export default {
     name: 'lists',
@@ -43,7 +53,8 @@
     },
 
     components: {
-      Tasks
+      Tasks,
+      draggable
     },
 
     mounted() {
@@ -54,8 +65,16 @@
       lists() {
         return this.$store.state.activeLists
       },
-      tasks() {
-        return this.$store.state.activeTasks[this.listProp._id];
+      tasks: {
+        get() {
+          return this.$store.state.activeTasks[this.listProp._id];
+        },
+        set(value){
+          // console.log('setting tasks: ', value)
+          var payload={ "listId":this.listProp._id, "tasks":value}
+          this.$store.commit('setTasks', payload)
+        }
+
       }
     },
 
@@ -72,16 +91,51 @@
         var listId = listProp._id
         this.newtask.listId = listId
         this.$store.dispatch('createTask', this.newtask);
+      },
+
+
+
+
+
+      add: function () {
+        listProp.push({
+          name: 'Juan'
+        });
+      },
+      replace: function () {
+        listProp = [{
+          name: 'Edgard'
+        }]
       }
+
+
     }
   }
 
 </script>
 
 <style scoped>
-  .wholeThing {
+  .item {
+    cursor: grab;
+    transition: all .250s;
+  }
+
+  .item:active {
+    cursor: grabbing;
+  }
+
+  .dragArea {
+    height: 100px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .wholeThing2 {
     overflow-y: auto;
     overflow-x: hidden;
+    height: 60vh;
+    margin: 5px;
+    padding: 5px;
   }
 
   .card {

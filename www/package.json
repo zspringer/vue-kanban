@@ -14,8 +14,10 @@
   "dependencies": {
     "axios": "^0.15.3",
     "socket.io-client": "^1.7.3",
+    "sortable": "^2.0.0",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0",
+    "vuedraggable": "^2.14.1",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
