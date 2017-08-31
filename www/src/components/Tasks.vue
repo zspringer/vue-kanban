@@ -46,6 +46,8 @@
     },
 
     mounted() {
+
+      console.log('mounted: boardId: ', this.taskProp.boardId)
       this.$store.dispatch('getComments', { boardId: this.taskProp.boardId, listId: this.taskProp.listId, taskId: this.taskProp._id })
     },
     computed: {

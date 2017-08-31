@@ -35,7 +35,7 @@
     // },
 
     mounted() {
-      this.$root.$store.dispatch('getComments', this.$route.params.id)
+      //this.$store.dispatch('getComments', this.$route.params.boardId)
     },
     computed: {
       // board() {

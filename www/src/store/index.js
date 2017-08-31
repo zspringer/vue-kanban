@@ -45,7 +45,7 @@ var store = new vuex.Store({
     },
 
     setComments(state, data) {
-      vue.set(state.activeComments, data[0].commentId, data)
+      vue.set(state.activeComments, data[0].taskId, data)
     },
 
 
@@ -116,7 +116,7 @@ var store = new vuex.Store({
       
         .then(res => {
 
-          console.log('getComments response: ', res)
+          console.log('getComments response: ', res) //good to here. Data present.
 
           commit('setComments', res.data.data)
         })
