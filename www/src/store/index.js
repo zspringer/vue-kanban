@@ -222,7 +222,7 @@ var store = new vuex.Store({
     removeTask({ commit, dispatch }, task) {
       api.delete('tasks/' + task._id)
         .then(res => {
-          dispatch('getTasks', task.boardId)
+          dispatch('getTasks', task)
         })
         .catch(err => {
           commit('handleError', err)
@@ -232,7 +232,7 @@ var store = new vuex.Store({
     removeComment({ commit, dispatch }, comment) {
       api.delete('comments/' + comment._id)
         .then(res => {
-          dispatch('getComments', comment.boardId)
+          dispatch('getComments', comment)
         })
         .catch(err => {
           commit('handleError', err)
