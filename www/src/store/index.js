@@ -108,23 +108,6 @@ var store = new vuex.Store({
         })
     },
 
-    // getTasks({ commit, dispatch }) {
-
-    //   //console.log(' TTask listId is: ' + task.listId)
-
-    //   api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
-      
-    //     .then(res => {
-
-    //       console.log('getTasks response: ', res)
-
-    //       commit('setTasks', res.data.data)
-    //     })
-    //     .catch(err => {
-    //       commit('handleError', err)
-    //     })
-    // },
-
     getComments({ commit, dispatch }, comment) {
 
       //console.log(' TTask listId is: ' + task.listId)

@@ -11,7 +11,7 @@
       <div v-if="commentCreate" class="row">
         <input type="text" placeholder="name" v-model="newcomment.name">
         <input type="text" placeholder="description" v-model="newcomment.description"><br/>
-        <button type="submit" class="btn" @click="createComment(commentProp)">Submit</button>
+        <button type="submit" class="btn" @click="createComment(taskProp)">Submit</button>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  // import Comments './Comments'
+  import Comments from './Comments'
 
   export default {
     name: 'tasks',
@@ -35,13 +35,18 @@
         newcomment: {
           name: '',
           description: '',
-          boardId: this.$route.params.id,
+          boardId: this.$route.params.boardId,
+          listId: '',
+          taskId: ''
         }
       }
     },
+    components: {
+      Comments
+    },
 
     mounted() {
-      //this.$root.$store.dispatch('getTasks',this.$route.params.id)
+      this.$store.dispatch('getComments', { boardId: this.taskProp.boardId, listId: this.taskProp.listId, taskId: this.taskProp._id })
     },
     computed: {
       // board() {
@@ -52,7 +57,7 @@
       // }
 
       comments() {
-        return this.$store.state.activeComments;
+        return this.$store.state.activeComments[this.taskProp._id];
       }
     },
 
@@ -62,11 +67,23 @@
       },
 
       showCommentCreate() {
-        this.taskCreate = !this.taskCreate;
+        this.commentCreate = !this.commentCreate;
       },
 
-      createComment() {
+      createComment(commentProp) {
         //this.newtask.listId = list._id
+
+        // console.log('list: ', commentProp.listId);
+        // console.log('task: ', commentProp._id);
+       
+
+        var listId = commentProp.listId;
+        var taskId = commentProp._id;
+        this.newcomment.listId = listId;
+        this.newcomment.taskId = taskId;
+
+        console.log('whole comment: ', this.newcomment)
+
         this.$store.dispatch('createComment', this.newcomment);
       }
     }

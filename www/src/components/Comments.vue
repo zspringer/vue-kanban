@@ -22,7 +22,7 @@
   export default {
     name: 'comments',
 
-    // props: ['commentProp'],
+    props: ['commentProp'],
     // data() {
     //   return {
     //     commentCreate: false,
