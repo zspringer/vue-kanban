@@ -1,25 +1,78 @@
 <template>
-  <div> 
-    <!-- add any other embellishments here -->
-    <!-- Active Tasks: {{tasks}} -->
+  <!-- <div>
+    <div class="card-deck "> -->
 
-     <!-- <li v-for="task in tasks"><router-link :to="'/tasks/'+task._id">{{task.name}}</router-link> <span @click="removeTask(task)">x</span></li>
-   -->
+  <div class="card">
+    <div class="card-block">
+      <button type="button" @click="removeTask(taskProp)" class="btn btn-primary glyphicon glyphicon-minus"></button>
+      <p class="card-title">{{taskProp.name}} <br/> ({{taskProp.description}})</p>
     </div>
+
+    <div>
+      <button @click="showCommentCreate" class="glyphicon glyphicon-plus">AddComment</button>
+      <div v-if="commentCreate" class="row">
+        <input type="text" placeholder="name" v-model="newcomment.name">
+        <input type="text" placeholder="description" v-model="newcomment.description"><br/>
+        <button type="submit" class="btn" @click="createComment(commentProp)">Submit</button>
+      </div>
+    </div>
+
+    <div v-for="comment in comments">
+      <!-- ///one task  -->
+      <Comments :commentProp='comment'></Comments>
+    </div>
+
+  </div>
+
+  <!-- </div>
+  </div> -->
 </template>
 
 <script>
-export default {
-  name: 'tasks',
-  mounted(){
-    //this.$root.$store.dispatch('getTasks',this.$route.params.id)
-  },
-  computed:{
-    board(){
-      return this.$store.state.activeTasks
+  // import Comments './Comments'
+
+  export default {
+    name: 'tasks',
+    props: ['taskProp'],
+    data() {
+      return {
+        commentCreate: false,
+        newcomment: {
+          name: '',
+          description: '',
+          boardId: this.$route.params.id,
+        }
+      }
+    },
+
+    mounted() {
+      //this.$root.$store.dispatch('getTasks',this.$route.params.id)
+    },
+    computed: {
+      // board() {
+      //   return this.$store.state.activeBoard
+      // },
+      // lists() {
+      //   return this.$store.state.activeLists
+      // }
+    },
+
+    methods: {
+      removeTask(task) {
+        this.$store.dispatch('removeTask', task)
+      },
+
+      showCommentCreate() {
+        this.taskCreate = !this.taskCreate;
+      },
+
+      createComment() {
+        //this.newtask.listId = list._id
+        this.$store.dispatch('createComment', this.newcomment);
+      }
     }
   }
-}
+
 </script>
 
 <style scoped>

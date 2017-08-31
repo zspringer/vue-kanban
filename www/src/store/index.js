@@ -82,8 +82,8 @@ var store = new vuex.Store({
     },
 
     getTasks({ commit, dispatch }, task) {
-      console.log('task: ' + task.boardId + '  lid: ' + task.listId)
-      
+      //console.log('task: ' + task.boardId + '  lid: ' + task.listId)
+
       /////////////////////////////////////////////////////////////////
       api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
         .then(res => {
@@ -138,6 +138,16 @@ var store = new vuex.Store({
         })
     },
 
+    createComment({ commit, dispatch }, comment) {
+      api.post('comments', comment)
+        .then(res => {
+          dispatch('getComments', comment)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
     removeBoard({ commit, dispatch }, board) {
       api.delete('boards/' + board._id)
         .then(res => {
@@ -154,6 +164,26 @@ var store = new vuex.Store({
 
 
           dispatch('getLists', list.boardId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    removeTask({ commit, dispatch }, task) {
+      api.delete('tasks/' + task._id)
+        .then(res => {
+          dispatch('getTasks', task.boardId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    removeComment({ commit, dispatch }, comment) {
+      api.delete('comments/' + comment._id)
+        .then(res => {
+          dispatch('getComments', comment.boardId)
         })
         .catch(err => {
           commit('handleError', err)
