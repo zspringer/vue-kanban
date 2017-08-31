@@ -25,7 +25,7 @@ var store = new vuex.Store({
     error: {},
     activeUser: {},
     activeLists: [],
-    activeTasks: [],
+    activeTasks: {},
     activeComments: []
   },
 
@@ -35,9 +35,15 @@ var store = new vuex.Store({
       state.boards = data
     },
 
-    setLists(state, data) {
+    setLists(state, data) { ///create object {listId, task}
       //console.log('boards: ' + data)
       state.activeLists = data
+    },
+
+    setTasks(state, data) {
+      //console.log('boards: ' + data)
+      // state.activeTasks[data[0].listId] = data
+      vue.set(state.activeTasks, data[0].listId, data)
     },
 
 
@@ -87,9 +93,17 @@ var store = new vuex.Store({
       //console.log('task: ' + task.boardId + '  lid: ' + task.listId)
 
       /////////////////////////////////////////////////////////////////
+      // api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
+
+      console.log('listId is: ' + task.listId)
+      //'/boards/' + task.boardId + 
       api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
+      
         .then(res => {
-          //commit('', res.data.data)
+
+          console.log('getTasks response: ', res)
+
+          commit('setTasks', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -105,7 +119,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
 
     createBoard({ commit, dispatch }, board) {
       //debugger
@@ -131,8 +144,10 @@ var store = new vuex.Store({
     },
 
     createTask({ commit, dispatch }, task) {
+
       api.post('tasks', task)
         .then(res => {
+          
           dispatch('getTasks', task)
         })
         .catch(err => {
@@ -234,6 +249,7 @@ var store = new vuex.Store({
           //commit('setBoards', res.data.data)
           commit('setUser', {})
           dispatch('getBoards')
+          router.push('/')
         })
         .catch(err => {
           commit('handleError', err)
@@ -259,7 +275,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
 
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)

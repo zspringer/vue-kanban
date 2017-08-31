@@ -36,8 +36,8 @@
         newtask: {
           name: '',
           description: '',
-          boardId: this.$route.params.id
-          //listId: listProp._id    //we think
+          boardId: this.$route.params.boardId,
+          listId: ''  //we think
         }
       }
     },
@@ -51,10 +51,10 @@
       //  this.$store.dispatch('getBoard', this.$route.params.boardId),
       // this.$store.dispatch('getLists', this.$route.params.boardId),
 
-        this.$store.dispatch('getBoard', this.$route.params.boardId),
+      this.$store.dispatch('getBoard', this.$route.params.boardId),
         this.$store.dispatch('getLists', this.$route.params.boardId),
 
-        this.$store.dispatch('getTasks', this.$route.params.boardId)
+        this.$store.dispatch('getTasks', this.newtask.listId)
     },
 
     computed: {
@@ -62,7 +62,7 @@
       //   return this.$store.state.activeLists
       // },
       tasks() {
-        return this.$store.state.activeTasks;
+        return this.$store.state.activeTasks[this.listProp._id];
       }
     },
 
@@ -76,7 +76,9 @@
         this.taskCreate = !this.taskCreate;
       },
 
-      createTask() {
+      createTask(listProp) {
+        var listId = listProp._id
+        this.newtask.listId = listId
         this.$store.dispatch('createTask', this.newtask);
       }
     }
