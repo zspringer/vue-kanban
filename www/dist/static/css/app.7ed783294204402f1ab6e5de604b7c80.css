@@ -36,9 +36,6 @@ li {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
-* {
-    /* outline: 1px solid black; */
-}
 .firstRow {
     height: 4%;
 }
@@ -243,4 +240,4 @@ button[data-v-17721eac] {
   float: left;
 }
 
-/*# sourceMappingURL=app.c504b5323d42cea831c4992a6f37a65e.css.map*/
+/*# sourceMappingURL=app.7ed783294204402f1ab6e5de604b7c80.css.map*/
