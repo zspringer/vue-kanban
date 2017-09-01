@@ -1,13 +1,13 @@
 <template>
 
-  <div class="card wholeThing">
+  <div class="card ">
     <div class="card-block">
-      <button type="button" @click="removeTask(taskProp)" class="btn btn-primary glyphicon glyphicon-minus"></button>
+      <button type="button" @click="removeTask(taskProp)" class="btn glyphicon glyphicon-trash"></button>
       <p class="card-title">{{taskProp.name}} <br/> ({{taskProp.description}})</p>
     </div>
 
-    <div>
-      <button @click="showCommentCreate" class="glyphicon glyphicon-plus">AddComment</button>
+    <div class="special">
+      <button @click="showCommentCreate" class="glyphicon glyphicon-plus"></button>
       <div v-if="commentCreate" class="row">
         <input type="text" placeholder="name" v-model="newcomment.name">
         <input type="text" placeholder="description" v-model="newcomment.description"><br/>
@@ -47,7 +47,7 @@
 
     mounted() {
 
-      console.log('mounted: boardId: ', this.taskProp.boardId)
+      // console.log('mounted: boardId: ', this.taskProp.boardId)
       this.$store.dispatch('getComments', { boardId: this.taskProp.boardId, listId: this.taskProp.listId, taskId: this.taskProp._id })
     },
     computed: {
@@ -77,7 +77,7 @@
 
         // console.log('list: ', commentProp.listId);
         // console.log('task: ', commentProp._id);
-       
+
 
         var listId = commentProp.listId;
         var taskId = commentProp._id;
@@ -94,18 +94,44 @@
 </script>
 
 <style scoped>
-  /* .wholeThing {
-    overflow-y: scroll;
-  } */
-
   .card {
-    /* border-color: black; */
-    /* 225px */
-    background-color: gray;
-    width: 215px;
+    background-color: lightgray;
+    /* width: 185px; */
+    width: 96%;
     text-align: center;
     float: left;
-    margin: 5px;
+
+    border-radius: 15px;
+    overflow-y: auto;
+
     padding: 5px;
+    margin: 5px 20px 5px 4px;
+     overflow-x: hidden;
   }
+
+  .card-title {
+    /* border: 1px solid black;  */
+    font-size: 14px;
+    float: left;
+  }
+
+  .card-block>button {
+    font-size: 5 px;
+    opacity: .8;
+    background: none;
+    float: left;
+  }
+
+  button {
+    opacity: .8;
+    background: none;
+    float: right;
+    border-radius: 10px;
+  }
+
+  .btn {
+    opacity: .8;
+    background: none;
+  }
+
 </style>

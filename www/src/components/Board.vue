@@ -1,8 +1,9 @@
 <template>
   <div class="wholeThing">
-
-    Active Board: {{board.name}} <br/>Board Description: {{board.description}}
-
+   
+      Active Board: {{board.name}}  <br>
+     Board Description: {{board.description}}
+  
     <div>
       <button @click="showListCreate">Add List</button>
       <div v-if="listCreate" class="row">
@@ -70,8 +71,23 @@
 </script>
 
 <style scoped>
-  .wholeThing{
+  .wholeThing {
     overflow-y: auto;
     overflow-x: hidden;
+    
+  }
+
+  .btn {
+    font-size: 5 px;
+    opacity: .8;
+    background: none;
+    height: 5px;
+    width: 5px;
+  }
+
+  button {
+    opacity: .8;
+    background: none;
+    border-radius: 10px;
   }
 </style>

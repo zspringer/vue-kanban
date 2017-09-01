@@ -43,7 +43,7 @@ var store = new vuex.Store({
       //console.log('boards: ' + data)
       // state.activeTasks[data[0].listId] = data
       //vue.set(state.activeTasks, data[0].listId, data)
-      console.log('data: ', data)
+      //console.log('data: ', data)
       vue.set(state.activeTasks, data.listId, data.tasks)
     },
 
@@ -281,13 +281,29 @@ var store = new vuex.Store({
             router.push('/app');
           }
           router.push('/'); //boards
-          console.log('res.data' + res.data)
+          //console.log('res.data' + res.data)
           commit('setUser', res.data.data)
         })
         .catch(err => {
           console.log('err ' + err)
           // commit('setUser', 'Nobody')
           dispatch('getBoards')
+          commit('handleError', err)
+        })
+    },
+
+    updateTaskParent({ commit, dispatch }, data) {
+
+      var update={listId: data.listId}
+
+      console.log(update);
+
+      api.put('tasks/' + data.taskId + '/', update)
+        .then(res => {    
+          console.log('made it this far')  
+         //dispatch('getTasks', task)
+        })
+        .catch(err => {
           commit('handleError', err)
         })
     },

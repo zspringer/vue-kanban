@@ -132,12 +132,28 @@
 </script>
 
 <style>
+  body {
+    background-image: url("./images/workspace.jpg");
+    text-align: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: gray;
+    margin: auto;
+    color: black;
+  }
+
+router-link:link{
+    color:black;
+  }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: black;
     margin-top: 60px;
   }
 
@@ -168,6 +184,12 @@
   }
 
   .firstRow {
-    height: 5%;
+    height: 4%;
+
+  }
+
+  #app {
+    margin: 0;
+    padding: 0;
   }
 </style>
