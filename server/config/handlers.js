@@ -22,7 +22,7 @@ let defaultErrorHandler = (err, req, res, next) => {
 }
 
 //Default Urls 
-var whitelist = ['https://funkanban.herokuapp.com', 'http://localhost:8080']; //put https://herokuname.heroku.com here when ready  ['http://localhost:8080']
+var whitelist = ['https://zdkanban.herokuapp.com', 'http://localhost:8080']; //put https://herokuname.heroku.com here when ready  ['http://localhost:8080']
 var corsOptions = {
 	origin: function (origin, callback) {
 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
