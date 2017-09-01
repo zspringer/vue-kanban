@@ -179,10 +179,6 @@ router-link:link{
     display: block;
   }
 
-  * {
-    /* outline: 1px solid black; */
-  }
-
   .firstRow {
     height: 4%;
 
