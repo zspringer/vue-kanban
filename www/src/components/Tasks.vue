@@ -1,5 +1,4 @@
 <template>
-
   <div class="card ">
     <div class="card-block">
       <button type="button" @click="removeTask(taskProp)" class="btn glyphicon glyphicon-trash"></button>
@@ -11,7 +10,7 @@
       <div v-if="commentCreate" class="row">
         <input type="text" placeholder="name" v-model="newcomment.name">
         <input type="text" placeholder="description" v-model="newcomment.description"><br/>
-        <button type="submit" class="btn" @click="createComment(taskProp)">Submit</button>
+        <button type="submit" class="btn1" @click.prevent.stop="createComment(taskProp)">Submit</button>
       </div>
     </div>
 
@@ -20,7 +19,6 @@
     </div>
 
   </div>
-
 </template>
 
 <script>
@@ -29,6 +27,7 @@
   export default {
     name: 'tasks',
     props: ['taskProp'],
+
     data() {
       return {
         commentCreate: false,
@@ -41,6 +40,7 @@
         }
       }
     },
+
     components: {
       Comments
     },
@@ -50,14 +50,8 @@
       // console.log('mounted: boardId: ', this.taskProp.boardId)
       this.$store.dispatch('getComments', { boardId: this.taskProp.boardId, listId: this.taskProp.listId, taskId: this.taskProp._id })
     },
-    computed: {
-      // board() {
-      //   return this.$store.state.activeBoard
-      // },
-      // lists() {
-      //   return this.$store.state.activeLists
-      // }
 
+    computed: {
       comments() {
         return this.$store.state.activeComments[this.taskProp._id];
       }
@@ -73,20 +67,16 @@
       },
 
       createComment(commentProp) {
-        //this.newtask.listId = list._id
-
-        // console.log('list: ', commentProp.listId);
-        // console.log('task: ', commentProp._id);
-
-
         var listId = commentProp.listId;
         var taskId = commentProp._id;
         this.newcomment.listId = listId;
         this.newcomment.taskId = taskId;
 
-        console.log('created comment User is: ', this.$store.state.activeUser.name)
-
-        this.$store.dispatch('createComment', this.newcomment);
+        this.$store.dispatch('createComment', this.newcomment).then(() => {
+          this.newcomment.name = '';
+          this.newcomment.description = '';
+          this.commentCreate = !this.commentCreate;
+        });        
       }
     }
   }
@@ -96,21 +86,19 @@
 <style scoped>
   .card {
     background-color: lightgray;
-    /* width: 185px; */
-    width: 96%;
+    width: 97%;
     text-align: center;
     float: left;
 
-    border-radius: 15px;
+    border-radius: 10px;
     overflow-y: auto;
 
     padding: 5px;
-    margin: 5px 20px 5px 4px;
-     overflow-x: hidden;
+    margin: 5px 22px 5px 3px;
+    overflow-x: hidden;
   }
 
   .card-title {
-    /* border: 1px solid black;  */
     font-size: 14px;
     float: left;
   }
@@ -126,12 +114,18 @@
     opacity: .8;
     background: none;
     float: right;
-    border-radius: 10px;
+    border-radius: 10px; 
   }
 
-  .btn {
+  .btn1 {
     opacity: .8;
     background: none;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 5px 22px 0 5px;
   }
 
+  input {
+    border-radius: 10px;
+  }
 </style>

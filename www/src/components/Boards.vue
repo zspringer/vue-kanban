@@ -1,11 +1,16 @@
 <template>
-  <div class="test">
-    <!-- Put header section here with login/logout, board menu, any user info -->
-    <!-- Integrate with add board below -->
-    <!-- Active Boards: {{boards}} -->
+  <div>
+    <div class="center1">
+      <h3>
+        Vue-Kanban lets you work more efficiently and effectively <br/>so you and your team can get more done.
+      </h3>
 
-    <!-- @click="createBoard" -->
-    <button @click="showBoardCreate">Add Board</button>
+      <h5>
+        Vue-Kanban’s structure using boards, lists, task-cards and comment-cards enable you to manage your projects<br/>        easily while enjoying the time-freedom and flexibility that only Vue-Kanban provides!
+      </h5>
+    </div>
+
+    <button class="center1" v-if="activeUser" @click="showBoardCreate">Add Board</button>
 
     <div v-if="boardCreate" class="row">
       <input type="text" placeholder="name" v-model="newboard.name">
@@ -13,14 +18,27 @@
       <button type="submit" class="btn" @click="createBoard">Submit</button>
     </div>
 
-    <ul>
-      <li v-for="board in boards" style="list-style: none">
-        <div class="special">
-          <router-link :to="'/boards/'+board._id" routerLinkActive="special">{{board.name}}<button @click.prevent.stop="removeBoard(board)" class="glyphicon glyphicon-trash btn btn-xs"></button></router-link> 
-         
-        </div>
-      </li>
-    </ul>
+    <div class="wrap">
+      <div class="center">
+        <ul class="centerX">
+
+          <li v-for="board in boards" class="wholeCard">
+            <div class="card ">
+
+              <div class="card-block">
+                <router-link :to="'/boards/'+board._id">
+                  <p class="card-title">{{board.name}}</p>
+                  <p class="card-text">{{board.description}}</p>
+                </router-link>
+                <button @click.prevent.stop="removeBoard(board)" class="glyphicon glyphicon-trash btn btn-xs"></button>
+              </div>
+
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -46,28 +64,23 @@
     computed: {
       boards() {
         return this.$store.state.boards
+      },
+
+      activeUser() {
+        return this.$store.state.activeUser
       }
     },
 
     methods: {
       showBoardCreate() {
         this.boardCreate = !this.boardCreate;
-
       },
 
       createBoard() {
-        // this.$store.dispatch('createBoard', {
-        //   name: 'Testing board creation',
-        //   description: 'blarg'
-        // })
-        //console.log('this board is: ' + this.newboard.name)
         this.$store.dispatch('createBoard', this.newboard);
-
-
       },
 
       removeBoard(board) {
-        //console.log(board)
         this.$store.dispatch('removeBoard', board)
       }
     }
@@ -76,22 +89,73 @@
 </script>
 
 <style scoped>
+  * {
+    /* border: 1px solid black; */
+  }
+
+  .card-title {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+
+  .card-text {
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  .center1 {
+    text-align: center;
+  }
+
+  .wholeCard {
+    font-weight: bold;
+    background-color: gray;
+    opacity: .5;
+    border-radius: 10px;
+    margin: 20px;
+  }
+
+  .center {
+    float: right;
+    position: relative;
+    right: 50%;
+    text-align: left;
+  }
+
+  .centerX {
+    position: relative;
+    left: 50%;
+  }
+
+  .wrap {
+    margin: 25px auto 0 auto;
+    width: 100%;
+  }
+
+  .card {
+    width: 150px;
+    text-align: center;
+  }
+
   button {
     font-size: 5 px;
     opacity: .8;
     background: none;
     color: black;
+    border-radius: 10px;
   }
 
-
-  .test {
-    border: 1px;
-    overflow: hidden;
-    border-radius: 15px;
-  }
-
-  p{    
+  p {
     color: black !important;
-    /* text-decoration: none; */
+    margin: 0;
+  }
+
+  ul li {
+    float: left;
+  }
+
+  input {
+    border-radius: 10px;
   }
 </style>

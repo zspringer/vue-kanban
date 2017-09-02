@@ -12,7 +12,7 @@
           <a class="navbar-brand" href="#">Vue Kanban</a>
         </div>
 
-        <div class="idiot">{{activeUser.name}} is Logged In</div>
+        <div class="user">{{activeUser.name}} is Logged In</div>
         <button @click="logOut()">Log Out</button>
 
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -29,8 +29,8 @@
             <li><a href="#">Page 2</a></li>
             <li><a href="#">Page 3</a></li>
           </ul>
+
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
             <li class="dropdown">
               <a class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"> Register<span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -42,6 +42,7 @@
                 </form>
               </ul>
             </li>
+
             <li class="dropdown">
               <a class="dropdown-toggle glyphicon glyphicon-log-in" data-toggle="dropdown"> Login<span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -52,14 +53,10 @@
                 </form>
               </ul>
             </li>
-            <!-- <button @click="logOut()">Log Out</button> -->
-            <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
           </ul>
         </div>
       </div>
     </nav>
-
-
 
     <error></error>
     <router-view></router-view>
@@ -86,24 +83,22 @@
     },
 
     mounted() {
-      //this.$store.dispatch('authenticate')
+
     },
 
     methods: {
       login() {
-        //console.log('starting log in 1')
         this.$store.dispatch('login', this.accountUser)
-        //this.viewLogIn = false;
       },
-      register() {
-        console.log(this.accountUser);
 
+      register() {
         this.$store.dispatch('register', this.accountUser)
-        //this.viewRegister = false;
       },
+
       checkForUser() {
         this.$store.dispatch('checkForUser')
       },
+
       logOut() {
         this.$store.dispatch('logout')
       }
@@ -127,8 +122,8 @@
     margin-top: 60px;
   }
 
-  .idiot{
-    color:white;
+  .user {
+    color: white;
   }
 
   .dropdown:hover .dropdown-menu {

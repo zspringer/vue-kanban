@@ -1,8 +1,12 @@
 <template>
   <div id="app">
+
+    <!-- NavBar for if user is not logged in -->
+
     <div v-if="!activeUser" class="loggedout">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
+
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -12,26 +16,13 @@
             <a class="navbar-brand" href="#">Vue Kanban</a>
           </div>
 
-
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <!-- <li class="active"><a href="#">Home</a></li>
-             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>  -->
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
-              <div v-if="!activeUser" class="nonSal">
-                <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+              <div v-if="!activeUser" class="nonSal">               
                 <li class="dropdown">
-                  <!-- v-if="!activeUser" -->
                   <a class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"> Register<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <form @submit.prevent="login()">
@@ -42,8 +33,8 @@
                     </form>
                   </ul>
                 </li>
+
                 <li class="dropdown">
-                  <!-- v-if="!activeUser" -->
                   <a class="dropdown-toggle glyphicon glyphicon-log-in" data-toggle="dropdown"> Login<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <form @submit.prevent="login()">
@@ -54,20 +45,17 @@
                   </ul>
                 </li>
               </div>
+
               <div v-else="" class="salutation">
-                <!-- v-if="activeUser" -->
                 <li class="idiot">{{activeUser.name}}</li>
                 <li> <button v-if="activeUser" class="getout" @click="logOut()">Log Out</button></li>
               </div>
-
-
-              <!-- <button @click="logOut()">Log Out</button> -->
-              <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
             </ul>
           </div>
         </div>
       </nav>
     </div>
+
     <!-- NavBar for if user is logged in -->
 
     <div v-if="activeUser" class="loggedin">
@@ -85,38 +73,19 @@
 
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <!-- <li class="active"><a href="#">Home</a></li>
-             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>  -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <div class="nonSal">
-                <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
               </div>
               <div class="salutation">
-                <!-- v-if="activeUser" -->
-                <li class="idiot">{{activeUser.name}}</li>
+                <li class="user">{{activeUser.name}}</li>
                 <li> <button class="getout" @click="logOut()">Log Out</button></li>
               </div>
-
-
-              <!-- <button @click="logOut()">Log Out</button> -->
-              <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
             </ul>
           </div>
         </div>
       </nav>
     </div>
-
-
 
     <error></error>
     <router-view></router-view>
@@ -144,30 +113,22 @@
     },
 
     mounted() {
-      //this.checkForUser()
-      //req.session.uid    //this.accountUser
       this.$store.dispatch('authenticate')
     },
 
     methods: {
       login() {
-        //console.log('starting log in 1')
         this.$store.dispatch('login', this.accountUser)
-        //this.viewLogIn = false;
-        // this.salutation = 'Hello ' + activeUser.name + '!';
       },
       register() {
-        console.log(this.accountUser);
-
+        //console.log(this.accountUser);
         this.$store.dispatch('register', this.accountUser)
-        //this.viewRegister = false;
       },
       checkForUser() {
         this.$store.dispatch('checkForUser')
       },
       logOut() {
         this.$store.dispatch('logout')
-        // this.salutation = 'Goodbye!';
       }
     },
     computed: {
@@ -205,7 +166,7 @@
     margin-top: 60px;
   }
 
-  .idiot {
+  .user {
     color: white;
     font-weight: bold;
     font-size: 20px;
@@ -221,6 +182,10 @@
     margin-top: 11px;
     margin-left: 10px;
     margin-right: 10px;
+
+    opacity: .8;
+    border-radius: 10px;
+    margin: 10px 10px 10px 0; 
   }
 
   .dropdown:hover .dropdown-menu {

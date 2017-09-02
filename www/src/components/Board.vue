@@ -1,15 +1,14 @@
 <template>
   <div class="wholeThing">
-   
-      Active Board: {{board.name}}  <br>
-     Board Description: {{board.description}}
-  
+
+    Active Board: {{board.name}} <br> Board Description: {{board.description}}
+
     <div>
       <button @click="showListCreate">Add List</button>
       <div v-if="listCreate" class="row">
         <input type="text" placeholder="name" v-model="newlist.name">
         <input type="text" placeholder="description" v-model="newlist.description">
-        <button type="button" class="btn" @click.prevent.stop="createList">Submit</button>
+        <button type="button" class="btn1" @click.prevent.stop="createList">Submit</button>
       </div>
     </div>
 
@@ -61,10 +60,13 @@
       },
 
       createList() {
-        this.$store.dispatch('createList', this.newlist);
+        this.$store.dispatch('createList', this.newlist).then(() => {
+          this.newlist.name = '';
+          this.newlist.description = '';
+          this.listCreate = !this.listCreate;
+        });
+
       }
-
-
     }
   }
 
@@ -74,20 +76,23 @@
   .wholeThing {
     overflow-y: auto;
     overflow-x: hidden;
-    
   }
 
-  .btn {
-    font-size: 5 px;
+  .btn1 {
     opacity: .8;
     background: none;
-    height: 5px;
-    width: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 5px 22px 0 5px;
   }
 
   button {
     opacity: .8;
     background: none;
+    border-radius: 10px;
+  }
+
+  input {
     border-radius: 10px;
   }
 </style>

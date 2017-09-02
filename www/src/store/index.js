@@ -8,13 +8,13 @@ var baseUrl = production ? '//zdkanban.herokuapp.com/' : '//localhost:3000/';
 
 let api = axios.create({
   baseURL: baseUrl + 'api',
-  timeout: 2000,
+  timeout: 4000,
   withCredentials: true
 })
 
 let auth = axios.create({
   baseURL: baseUrl,
-  timeout: 2000,
+  timeout: 4000,
   withCredentials: true
 })
 
@@ -37,7 +37,7 @@ var store = new vuex.Store({
       state.boards = data
     },
 
-    setLists(state, data) { 
+    setLists(state, data) {
       state.activeLists = data
     },
 
@@ -48,6 +48,7 @@ var store = new vuex.Store({
       //vue.set(state.activeTasks, data[0].listId, data)
       //console.log('data: ', data)
       vue.set(state.activeTasks, data.listId, data.tasks)
+
     },
 
 
@@ -100,13 +101,9 @@ var store = new vuex.Store({
     },
 
     getTasks({ commit, dispatch }, task) {
-
       api('/boards/' + task.boardId + '/lists/' + task.listId + "/tasks")
-      
         .then(res => {
-
-          var payload={ "listId":task.listId, "tasks":res.data.data}
-
+          var payload = { "listId": task.listId, "tasks": res.data.data }
           commit('setTasks', payload)
         })
         .catch(err => {
@@ -116,12 +113,8 @@ var store = new vuex.Store({
 
     getComments({ commit, dispatch }, comment) {
       api('/boards/' + comment.boardId + '/lists/' + comment.listId + "/tasks/" + comment.taskId + "/comments")
-      
         .then(res => {
-
-         // console.log('getComments response: ', res) //good to here. Data present.
-
-         var payload={ "taskId":comment.taskId, "comments":res.data.data}
+          var payload = { "taskId": comment.taskId, "comments": res.data.data }
           commit('setComments', payload)
         })
         .catch(err => {
@@ -166,7 +159,7 @@ var store = new vuex.Store({
 
       api.post('tasks', task)
         .then(res => {
-          
+
           dispatch('getTasks', task)
         })
         .catch(err => {
@@ -297,14 +290,14 @@ var store = new vuex.Store({
 
     updateTaskParent({ commit, dispatch }, data) {
 
-      var update={listId: data.listId}
+      var update = { listId: data.listId }
 
       console.log(update);
 
       api.put('tasks/' + data.taskId + '/', update)
-        .then(res => {    
-          console.log('made it this far')  
-         //dispatch('getTasks', task)
+        .then(res => {
+          console.log('made it this far')
+          //dispatch('getTasks', task)
         })
         .catch(err => {
           commit('handleError', err)
