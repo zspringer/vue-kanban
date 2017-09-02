@@ -16,15 +16,15 @@ let server = require('http').createServer(app)
 
 function Validate(req, res, next) {
     // ONLY ALLOW GET METHOD IF NOT LOGGED IN 
-    console.log(req.session)
-    if (req.method !== 'GET' && !req.session.uid) { //req.method !== 'GET' && 
+    //console.log(req.session)
+    if (!req.session.uid) { //req.method !== 'GET' && 
         return res.send({ error: 'Please Login or Register to continue' })
     }
     return next()
 }
 
 function logger(req, res, next) {
-    console.log('INCOMING REQUEST', req.url)
+    //console.log('INCOMING REQUEST', req.url)
     next()
 }
 
