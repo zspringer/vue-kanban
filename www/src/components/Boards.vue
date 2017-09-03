@@ -1,21 +1,14 @@
 <template>
   <div>
-    <div class="center1">
-      <h3>
-        Vue-Kanban lets you work more efficiently and effectively <br/>so you and your team can get more done.
-      </h3>
-
-      <h5>
-        Vue-Kanban’s structure using boards, lists, task-cards and comment-cards enable you to manage your projects<br/>        easily while enjoying the time-freedom and flexibility that only Vue-Kanban provides!
-      </h5>
-    </div>
 
     <button class="center1" v-if="activeUser" @click="showBoardCreate">Add Board</button>
 
     <div v-if="boardCreate" class="row">
-      <input type="text" placeholder="name" v-model="newboard.name">
-      <input type="text" placeholder="description" v-model="newboard.description">
-      <button type="submit" class="btn" @click="createBoard">Submit</button>
+      <div class="special">
+        <input type="text" placeholder="name" v-model="newboard.name">
+        <input type="text" placeholder="description" v-model="newboard.description">
+        <button type="submit" class="btn" @click="createBoard">Create</button>
+      </div>
     </div>
 
     <div class="wrap">
@@ -24,7 +17,6 @@
 
           <li v-for="board in boards" class="wholeCard">
             <div class="card ">
-
               <div class="card-block">
                 <router-link :to="'/boards/'+board._id">
                   <p class="card-title">{{board.name}}</p>
@@ -32,7 +24,6 @@
                 </router-link>
                 <button @click.prevent.stop="removeBoard(board)" class="glyphicon glyphicon-trash btn btn-xs"></button>
               </div>
-
             </div>
           </li>
 
@@ -93,6 +84,14 @@
     /* border: 1px solid black; */
   }
 
+  .row{
+    margin-top:20px;
+  }
+
+  .btn {
+    border: 1px solid black;
+  }
+
   .card-title {
     font-weight: bold;
     font-size: 16px;
@@ -121,6 +120,7 @@
     position: relative;
     right: 50%;
     text-align: left;
+    margin: 0;
   }
 
   .centerX {
@@ -129,7 +129,7 @@
   }
 
   .wrap {
-    margin: 25px auto 0 auto;
+    margin: 0 auto 0 auto;
     width: 100%;
   }
 
@@ -139,7 +139,6 @@
   }
 
   button {
-    font-size: 5 px;
     opacity: .8;
     background: none;
     color: black;
@@ -158,4 +157,5 @@
   input {
     border-radius: 10px;
   }
+
 </style>

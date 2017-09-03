@@ -10,7 +10,7 @@
       <div v-if="commentCreate" class="row">
         <input type="text" placeholder="name" v-model="newcomment.name">
         <input type="text" placeholder="description" v-model="newcomment.description"><br/>
-        <button type="submit" class="btn1" @click.prevent.stop="createComment(taskProp)">Submit</button>
+        <button type="submit" class="btn1" @click.prevent.stop="createComment(taskProp)">Create</button>
       </div>
     </div>
 
@@ -46,8 +46,6 @@
     },
 
     mounted() {
-
-      // console.log('mounted: boardId: ', this.taskProp.boardId)
       this.$store.dispatch('getComments', { boardId: this.taskProp.boardId, listId: this.taskProp.listId, taskId: this.taskProp._id })
     },
 

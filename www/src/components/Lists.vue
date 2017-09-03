@@ -9,7 +9,7 @@
         <div v-if="taskCreate" class="row1">
           <input type="text" placeholder="name" v-model="newtask.name">
           <input type="text" placeholder="description" v-model="newtask.description"><br/>
-          <button type="submit" class="btn1" @click="createTask(listProp)">Submit</button>
+          <button type="submit" class="btn1" @click="createTask(listProp)">Create</button>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@
 
   .main {
     overflow-x: hidden;
-    height: 100vh;
+    height: 80vh;
     border: 1px solid black;
     border-radius: 10px;
 

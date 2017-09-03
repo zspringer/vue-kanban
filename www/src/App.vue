@@ -16,12 +16,10 @@
             <a class="navbar-brand" href="#">Vue Kanban</a>
           </div>
 
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-            </ul>
-
+          <div class=" navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <div v-if="!activeUser" class="nonSal">               
+              <div v-if="!activeUser" class="nonSal">
+
                 <li class="dropdown">
                   <a class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"> Register<span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -29,7 +27,7 @@
                       <input type="text" placeholder="name" v-model="accountUser.name">
                       <input type="text" placeholder="email" v-model="accountUser.email">
                       <input type="text" placeholder="password" v-model="accountUser.password">
-                      <li><button type="submit" class="btn" @click="register()">Submit</button></li>
+                      <li><button type="submit" class="btn2" @click="register()">Register</button></li>
                     </form>
                   </ul>
                 </li>
@@ -40,14 +38,14 @@
                     <form @submit.prevent="login()">
                       <input type="text" placeholder="email" v-model="accountUser.email">
                       <input type="text" placeholder="password" v-model="accountUser.password">
-                      <li><button type="submit" class="btn" @click="login()">Log In</button></li>
+                      <li><button type="submit" class="btn2" @click="login()">Log In</button></li>
                     </form>
                   </ul>
                 </li>
               </div>
 
               <div v-else="" class="salutation">
-                <li class="idiot">{{activeUser.name}}</li>
+                <li class="user">{{activeUser.name}}</li>
                 <li> <button v-if="activeUser" class="getout" @click="logOut()">Log Out</button></li>
               </div>
             </ul>
@@ -61,6 +59,7 @@
     <div v-if="activeUser" class="loggedin">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
+
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -70,24 +69,33 @@
             <a class="navbar-brand" href="#">Vue Kanban</a>
           </div>
 
+          <div class=" navbar-collapse" id="myNavbar">
+            <div class="special">
+              <ul class="nav navbar-nav navbar-right">
 
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <div class="nonSal">
-              </div>
-              <div class="salutation">
                 <li class="user">{{activeUser.name}}</li>
                 <li> <button class="getout" @click="logOut()">Log Out</button></li>
-              </div>
-            </ul>
+              </ul>
+            </div>
+
           </div>
+
         </div>
       </nav>
     </div>
 
     <error></error>
+
+    <div class="center1">
+      <h3>
+        Vue-Kanban lets you work more efficiently and effectively <br/>so you and your team can get more done.
+      </h3>
+
+      <h5>
+        Vue-Kanban’s structure using boards, lists, task-cards and comment-cards enable you to manage your projects<br/>        easily while enjoying the time-freedom and flexibility that only Vue-Kanban provides!
+      </h5>
+    </div>
+
     <router-view></router-view>
   </div>
 </template>
@@ -121,7 +129,6 @@
         this.$store.dispatch('login', this.accountUser)
       },
       register() {
-        //console.log(this.accountUser);
         this.$store.dispatch('register', this.accountUser)
       },
       checkForUser() {
@@ -141,6 +148,35 @@
 </script>
 
 <style>
+  * {
+    /* border: 1px solid white; */
+  }
+
+  .dropdown-menu {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .btn2 {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    margin: 5px;
+  }
+
+  input {
+    color: black;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .center1 {
+    text-align: center;
+    margin: 0 0 0 0;
+  }
+
   body {
     background-image: url("./images/workspace.jpg");
     text-align: center;
@@ -150,10 +186,6 @@
     background-size: cover;
     background-color: gray;
     margin: auto;
-    color: black;
-  }
-
-  router-link:link {
     color: black;
   }
 
@@ -170,8 +202,13 @@
     color: white;
     font-weight: bold;
     font-size: 20px;
-    margin-right: 75px;
-    margin-top: 15px;
+    float: left;
+    margin: 8px;
+  }
+
+  #myNavbar {
+    width: 350 px;
+    padding: 5px;
   }
 
   li {
@@ -179,13 +216,13 @@
   }
 
   .getout {
-    margin-top: 11px;
-    margin-left: 10px;
-    margin-right: 10px;
-
     opacity: .8;
     border-radius: 10px;
-    margin: 10px 10px 10px 0; 
+    margin: 10px 10px 10px 0;
+
+    background-color: black;
+    color: white;
+    float: right;
   }
 
   .dropdown:hover .dropdown-menu {

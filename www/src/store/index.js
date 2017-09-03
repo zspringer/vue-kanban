@@ -41,38 +41,26 @@ var store = new vuex.Store({
       state.activeLists = data
     },
 
-
-    setTasks(state, data) {///create object {listId, task}
-      //console.log('boards: ' + data)
-      // state.activeTasks[data[0].listId] = data
-      //vue.set(state.activeTasks, data[0].listId, data)
-      //console.log('data: ', data)
+    setTasks(state, data) {
       vue.set(state.activeTasks, data.listId, data.tasks)
-
     },
-
 
     setComments(state, data) {
       //vue.set(state.activeComments, data[0].taskId, data)
       vue.set(state.activeComments, data.taskId, data.comments)
     },
 
-
     setUser(state, data) {
-      //console.log('test1: ' + data)
       state.activeUser = data
     },
 
     setActiveBoard(state, data) {
-      //console.log('setting aCTIVE BOARD: ' + data);
       state.activeBoard = data
     },
 
     handleError(state, err) {
       state.error = err
     }
-
-
 
   },
   actions: {
@@ -133,10 +121,8 @@ var store = new vuex.Store({
     },
 
     createBoard({ commit, dispatch }, board) {
-      //debugger
       api.post('boards/', board)
         .then(res => {
-          //console.log('getting boards now')
           dispatch('getBoards')
         })
         .catch(err => {
@@ -147,7 +133,6 @@ var store = new vuex.Store({
     createList({ commit, dispatch }, list) {
       api.post('lists', list)
         .then(res => {
-          //console.log('Created list', res)
           dispatch('getLists', list.boardId)
         })
         .catch(err => {
@@ -156,10 +141,8 @@ var store = new vuex.Store({
     },
 
     createTask({ commit, dispatch }, task) {
-
       api.post('tasks', task)
         .then(res => {
-
           dispatch('getTasks', task)
         })
         .catch(err => {
@@ -190,8 +173,6 @@ var store = new vuex.Store({
     removeList({ commit, dispatch }, list) {
       api.delete('lists/' + list._id)
         .then(res => {
-
-
           dispatch('getLists', list.boardId)
         })
         .catch(err => {
@@ -238,15 +219,12 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    //more new ones to finish
 
     login({ commit, dispatch }, accountUser) {
       // commit('checkForegisterrUser', accountUser)
-      //console.log('starting log in 2')
       auth.post('login', accountUser)
         .then(res => {
           commit('setUser', res.data.data)
-          //console.log(res.data.data.name);
           dispatch('getBoards')
         })
         .catch(err => {
@@ -256,14 +234,16 @@ var store = new vuex.Store({
 
     logout({ commit, dispatch }, accountUser) {
       // commit('checkForegisterrUser', accountUser)
+
       auth.delete('logout', accountUser)
         .then(res => {
-          //commit('setBoards', res.data.data)
           commit('setUser', {})
-          dispatch('getBoards')
-          router.push('/')
+            commit('setActiveBoard',{})
+            router.push('/')
+            window.location.reload()
         })
-        .catch(err => {
+        .catch(err => { 
+          //console.log('error: ', err)
           commit('handleError', err)
         })
     },
@@ -289,15 +269,12 @@ var store = new vuex.Store({
     },
 
     updateTaskParent({ commit, dispatch }, data) {
-
       var update = { listId: data.listId }
-
-      console.log(update);
-
+      //console.log(update);
       api.put('tasks/' + data.taskId + '/', update)
         .then(res => {
           console.log('made it this far')
-          //dispatch('getTasks', task)
+          dispatch('getTasks', task)
         })
         .catch(err => {
           commit('handleError', err)

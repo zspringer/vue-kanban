@@ -8,7 +8,7 @@
       <div v-if="listCreate" class="row">
         <input type="text" placeholder="name" v-model="newlist.name">
         <input type="text" placeholder="description" v-model="newlist.description">
-        <button type="button" class="btn1" @click.prevent.stop="createList">Submit</button>
+        <button type="button" class="btn1" @click.prevent.stop="createList">Create</button>
       </div>
     </div>
 
@@ -26,6 +26,7 @@
     data() {
       return {
         listCreate: false,
+        listHeight: '',
         newlist: {
           name: '',
           description: '',
@@ -73,6 +74,10 @@
 </script>
 
 <style scoped>
+  .row {
+    margin: 20px;
+  }
+
   .wholeThing {
     overflow-y: auto;
     overflow-x: hidden;
@@ -90,6 +95,7 @@
     opacity: .8;
     background: none;
     border-radius: 10px;
+    margin:10px;
   }
 
   input {
