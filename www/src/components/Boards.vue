@@ -21,6 +21,8 @@
                 <router-link :to="'/boards/'+board._id">
                   <p class="card-title">{{board.name}}</p>
                   <p class="card-text">{{board.description}}</p>
+                  <p class="creator">Created by: {{board.creatorName}}</p>
+
                 </router-link>
                 <button @click.prevent.stop="removeBoard(board)" class="glyphicon glyphicon-trash btn btn-xs"></button>
               </div>
@@ -41,7 +43,8 @@
         boardCreate: false,
         newboard: {
           name: '',
-          description: ''
+          description: '',
+          creatorName: ''
         }
       }
     },
@@ -68,11 +71,23 @@
       },
 
       createBoard() {
-        this.$store.dispatch('createBoard', this.newboard);
+        var creatorName = this.activeUser.name
+        this.newboard.creatorName = creatorName
+
+        this.$store.dispatch('createBoard', this.newboard).then(() => {
+          this.newboard.name = '';
+          this.newboard.description = '';
+          this.newboard.creatorName = '';
+          this.boardCreate = !this.boardCreate;
+        });
       },
 
       removeBoard(board) {
-        this.$store.dispatch('removeBoard', board)
+        if (board.creatorId == this.activeUser._id) {
+          this.$store.dispatch('removeBoard', board)
+        } else {
+          alert('You do not have permission to remove this!')
+        }
       }
     }
   }
@@ -84,8 +99,12 @@
     /* border: 1px solid black; */
   }
 
-  .row{
-    margin-top:20px;
+  .creator {
+    font-size: 10px;
+  }
+
+  .row {
+    margin-top: 20px;
   }
 
   .btn {
@@ -119,7 +138,9 @@
     float: right;
     position: relative;
     right: 50%;
-    text-align: left;
+    /* text-align: left; */
+    text-align: center;
+
     margin: 0;
   }
 
@@ -157,5 +178,4 @@
   input {
     border-radius: 10px;
   }
-
 </style>

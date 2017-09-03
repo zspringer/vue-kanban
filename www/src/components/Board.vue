@@ -1,7 +1,9 @@
 <template>
   <div class="wholeThing">
 
-    Active Board: {{board.name}} <br> Board Description: {{board.description}}
+    Active Board: {{board.name}}
+    <br> Board Description: {{board.description}}
+    <p class="creator">Created by: {{board.creatorName}}</p>
 
     <div>
       <button @click="showListCreate">Add List</button>
@@ -30,7 +32,8 @@
         newlist: {
           name: '',
           description: '',
-          boardId: this.$route.params.boardId
+          boardId: this.$route.params.boardId,
+          creatorName: ''
         }
       }
     },
@@ -50,8 +53,13 @@
       board() {
         return this.$store.state.activeBoard
       },
+
       lists() {
         return this.$store.state.activeLists
+      },
+
+      activeUser() {
+        return this.$store.state.activeUser
       }
     },
 
@@ -61,12 +69,15 @@
       },
 
       createList() {
+        var creatorName = this.activeUser.name;
+        this.newlist.creatorName = creatorName
+
         this.$store.dispatch('createList', this.newlist).then(() => {
           this.newlist.name = '';
           this.newlist.description = '';
+          this.newlist.creatorName = '';
           this.listCreate = !this.listCreate;
         });
-
       }
     }
   }
@@ -74,6 +85,10 @@
 </script>
 
 <style scoped>
+  .creator {
+    font-size: 10px;
+  }
+
   .row {
     margin: 20px;
   }
@@ -95,7 +110,7 @@
     opacity: .8;
     background: none;
     border-radius: 10px;
-    margin:10px;
+    margin: 10px;
   }
 
   input {

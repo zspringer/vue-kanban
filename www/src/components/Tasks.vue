@@ -2,6 +2,7 @@
   <div class="card ">
     <div class="card-block">
       <button type="button" @click="removeTask(taskProp)" class="btn glyphicon glyphicon-trash"></button>
+      <p class="creator">Created by: {{taskProp.creatorName}}</p>
       <p class="card-title">{{taskProp.name}} <br/> ({{taskProp.description}})</p>
     </div>
 
@@ -36,7 +37,8 @@
           description: '',
           boardId: this.$route.params.boardId,
           listId: '',
-          taskId: ''
+          taskId: '',
+          creatorName: ''
         }
       }
     },
@@ -52,12 +54,20 @@
     computed: {
       comments() {
         return this.$store.state.activeComments[this.taskProp._id];
+      },
+
+      activeUser() {
+        return this.$store.state.activeUser
       }
     },
 
     methods: {
       removeTask(task) {
-        this.$store.dispatch('removeTask', task)
+        if (task.creatorId == this.activeUser._id) {
+          this.$store.dispatch('removeTask', task)
+        } else {
+          alert('You do not have permission to remove this!')
+        }
       },
 
       showCommentCreate() {
@@ -67,14 +77,17 @@
       createComment(commentProp) {
         var listId = commentProp.listId;
         var taskId = commentProp._id;
+        var creatorName = this.activeUser.name;
         this.newcomment.listId = listId;
         this.newcomment.taskId = taskId;
+        this.newcomment.creatorName = creatorName;
 
         this.$store.dispatch('createComment', this.newcomment).then(() => {
           this.newcomment.name = '';
           this.newcomment.description = '';
+          this.newcomment.creatorName = '';
           this.commentCreate = !this.commentCreate;
-        });        
+        });
       }
     }
   }
@@ -82,6 +95,10 @@
 </script>
 
 <style scoped>
+  .creator {
+    font-size: 10px;
+  }
+
   .card {
     background-color: lightgray;
     width: 97%;
@@ -112,7 +129,7 @@
     opacity: .8;
     background: none;
     float: right;
-    border-radius: 10px; 
+    border-radius: 10px;
   }
 
   .btn1 {

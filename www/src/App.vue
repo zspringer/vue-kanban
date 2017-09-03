@@ -97,6 +97,7 @@
     </div>
 
     <router-view></router-view>
+
   </div>
 </template>
 
@@ -174,7 +175,7 @@
 
   .center1 {
     text-align: center;
-    margin: 0 0 0 0;
+    margin: 0;
   }
 
   body {
@@ -227,10 +228,6 @@
 
   .dropdown:hover .dropdown-menu {
     display: block;
-  }
-
-  .firstRow {
-    height: 4%;
   }
 
   #app {

@@ -2,6 +2,7 @@
   <div class="card main">
     <div class="card-block">
       <button type="button" @click="removeList(listProp)" class="btn glyphicon glyphicon-trash"></button>
+      <p class="creator">Created by: {{listProp.creatorName}}</p>
       <button @click="showTaskCreate" class="glyphicon glyphicon-plus right"></button>
       <p class="card-title">{{listProp.name}} <br/> ({{listProp.description}})</p>
 
@@ -39,7 +40,8 @@
           name: '',
           description: '',
           boardId: this.$route.params.boardId,
-          listId: ''
+          listId: '',
+          creatorName: ''
         }
       }
     },
@@ -57,10 +59,16 @@
       lists() {
         return this.$store.state.activeLists
       },
+
+      activeUser() {
+        return this.$store.state.activeUser
+      },
+
       tasks: {
         get() {
           return this.$store.state.activeTasks[this.listProp._id];
         },
+
         set(value) {
           var payload = { "listId": this.listProp._id, "tasks": value }
           this.$store.commit('setTasks', payload)
@@ -70,7 +78,11 @@
 
     methods: {
       removeList(list) {
-        this.$store.dispatch('removeList', list)
+        if (list.creatorId == this.activeUser._id) {
+          this.$store.dispatch('removeList', list)
+        } else {
+          alert('You do not have permission to remove this!')
+        }
       },
 
       showTaskCreate() {
@@ -79,10 +91,15 @@
 
       createTask(listProp) {
         var listId = listProp._id
+        var creatorName = this.activeUser.name;
         this.newtask.listId = listId
+        this.newtask.creatorName = creatorName
+
+
         this.$store.dispatch('createTask', this.newtask).then(() => {
           this.newtask.name = '';
           this.newtask.description = '';
+          this.newtask.creatorName = '';
           this.taskCreate = !this.taskCreate;
         });
       },
@@ -100,6 +117,10 @@
 </script>
 
 <style scoped>
+  .creator {
+    font-size: 10px;
+  }
+
    ::-webkit-scrollbar {
     display: none;
   }
@@ -126,7 +147,7 @@
     border-radius: 10px;
 
     margin: 10px;
-    padding: 5px;  
+    padding: 5px;
 
     overflow-y: scroll;
   }
@@ -138,7 +159,7 @@
     float: left;
 
     margin: 10px;
-    padding: 7px; 
+    padding: 7px;
 
     overflow-y: auto;
     opacity: .93;
@@ -174,7 +195,7 @@
     background: none;
     float: right;
     border-radius: 10px;
-    margin:5px;
+    margin: 5px;
   }
 
   .right {
@@ -192,25 +213,5 @@
   input {
     border-radius: 10px;
   }
-  /* .center {
-    float: right;
-    position: relative;
-    right: 50%;
-    text-align: left;
-  }
 
-  .centerX {
-    position: relative;
-    left: 50%;
-  }
-
-  .wrap {
-    margin: 25px auto 0 auto;
-    width: 100%;
-  }
-
-  ul li {
-    float: left;
-  }
-*/
 </style>
