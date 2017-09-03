@@ -21,7 +21,7 @@ input {
 }
 .center1 {
   text-align: center;
-  margin: 0 0 0 0;
+  margin: 0;
 }
 body {
   background-image: url(/static/img/workspace.94bd840.jpg);
@@ -65,9 +65,6 @@ li {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
-.firstRow {
-  height: 4%;
-}
 #app {
   margin: 0;
   padding: 0;
@@ -95,8 +92,11 @@ li {
 *[data-v-0c6e3af6] {
   /* border: 1px solid black; */
 }
-.row[data-v-0c6e3af6]{
-  margin-top:20px;
+.creator[data-v-0c6e3af6] {
+  font-size: 10px;
+}
+.row[data-v-0c6e3af6] {
+  margin-top: 20px;
 }
 .btn[data-v-0c6e3af6] {
   border: 1px solid black;
@@ -124,7 +124,9 @@ li {
   float: right;
   position: relative;
   right: 50%;
-  text-align: left;
+  /* text-align: left; */
+  text-align: center;
+
   margin: 0;
 }
 .centerX[data-v-0c6e3af6] {
@@ -156,7 +158,9 @@ input[data-v-0c6e3af6] {
   border-radius: 10px;
 }
 
-
+.creator[data-v-5337eb44] {
+  font-size: 10px;
+}
 .row[data-v-5337eb44] {
   margin: 20px;
 }
@@ -175,117 +179,103 @@ button[data-v-5337eb44] {
   opacity: .8;
   background: none;
   border-radius: 10px;
-  margin:10px;
+  margin: 10px;
 }
 input[data-v-5337eb44] {
   border-radius: 10px;
 }
 
+.creator[data-v-2392e0e6] {
+  font-size: 10px;
+}
 [data-v-2392e0e6]::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .item[data-v-2392e0e6] {
-    cursor: -webkit-grab;
-    cursor: grab;
-    transition: all .250s;
+  cursor: -webkit-grab;
+  cursor: grab;
+  transition: all .250s;
 }
 .item[data-v-2392e0e6]:active {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 .dragArea[data-v-2392e0e6] {
-    height: 100px;
-    margin-bottom: 20px;
-    width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 .main[data-v-2392e0e6] {
-    overflow-x: hidden;
-    height: 80vh;
-    border: 1px solid black;
-    border-radius: 10px;
+  overflow-x: hidden;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 10px;
 
-    margin: 10px;
-    padding: 5px;  
+  margin: 10px;
+  padding: 5px;
 
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 .card[data-v-2392e0e6] {
-    background-color: transparent;
-    width: 225px;
-    text-align: center;
-    float: left;
+  background-color: transparent;
+  width: 225px;
+  text-align: center;
+  float: left;
 
-    margin: 10px;
-    padding: 7px; 
+  margin: 10px;
+  padding: 7px;
 
-    overflow-y: auto;
-    opacity: .93;
+  overflow-y: auto;
+  opacity: .93;
 }
 .card-block[data-v-2392e0e6] {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 5000;
-    width: 98%;
-    background-color: grey;
-    overflow: hidden;
-    border-radius: 10px;
-    margin: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+  width: 98%;
+  background-color: grey;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: auto;
 }
 .card-title[data-v-2392e0e6] {
-    width: 100%;
-    font-size: 18px;
-    float: left;
-    background-color: grey;
+  width: 100%;
+  font-size: 18px;
+  float: left;
+  background-color: grey;
 }
 .card-block>button[data-v-2392e0e6] {
-    font-size: 5 px;
-    opacity: .8;
-    background: none;
-    float: left;
+  font-size: 5 px;
+  opacity: .8;
+  background: none;
+  float: left;
 }
 button[data-v-2392e0e6] {
-    opacity: .8;
-    background: none;
-    float: right;
-    border-radius: 10px;
-    margin:5px;
+  opacity: .8;
+  background: none;
+  float: right;
+  border-radius: 10px;
+  margin: 5px;
 }
 .right[data-v-2392e0e6] {
-    float: right !important;
+  float: right !important;
 }
 .btn1[data-v-2392e0e6] {
-    opacity: .8;
-    background: none;
-    border-radius: 10px;
-    border: 1px solid black;
-    margin: 5px 12px 5px 0;
+  opacity: .8;
+  background: none;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 5px 12px 5px 0;
 }
 input[data-v-2392e0e6] {
-    border-radius: 10px;
+  border-radius: 10px;
 }
-  /* .center {
-    float: right;
-    position: relative;
-    right: 50%;
-    text-align: left;
-  }
 
-  .centerX {
-    position: relative;
-    left: 50%;
-  }
 
-  .wrap {
-    margin: 25px auto 0 auto;
-    width: 100%;
-  }
-
-  ul li {
-    float: left;
-  }
-*/
-
+.creator[data-v-41f50306] {
+  font-size: 10px;
+}
 .card[data-v-41f50306] {
   background-color: lightgray;
   width: 97%;
@@ -326,6 +316,9 @@ input[data-v-41f50306] {
   border-radius: 10px;
 }
 
+.creator[data-v-17721eac] {
+  font-size: 10px;
+}
 .card[data-v-17721eac] {
   overflow-y: auto;
   background-color: lightslategray;
@@ -350,4 +343,4 @@ button[data-v-17721eac] {
   float: left;
 }
 
-/*# sourceMappingURL=app.8c5e98b6bd02c4d6882a020b8c29a936.css.map*/
+/*# sourceMappingURL=app.506168cd27a3275a25d412cd5254fa11.css.map*/
