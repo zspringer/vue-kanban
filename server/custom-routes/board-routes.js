@@ -4,32 +4,14 @@ let Lists = require('../models/list')
 let Tasks = require('../models/task')
 let Comments = require('../models/comment')
 
-///:boardId/lists:listId/tasks:taskId/comments:commentId
-///:listId/tasks
-///:taskId/comments
-///:commentId
-
 module.exports = {
-    // aBoard: {   //covered in api
-    //     path: '/boards/:boardId',
-    //     reqType: 'get',
-    //     method(req, res, next) {
-    //         let action = 'Find specific Board'
-    //         Boards.find({ boardId: req.params.boardId }) //in Lists, find all boards with boardIdxxx
-    //             .then(board => {
-    //                 res.send(handleResponse(action, board))
-    //             }).catch(error => {
-    //                 return next(handleResponse(action, null, error))
-    //             })
-    //     }
-    // },
 
     boardAllLists: {
         path: '/boards/:boardId/lists',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Board Lists'
-            Lists.find({ boardId: req.params.boardId }) //in Lists, find all boards with boardIdxxx
+            Lists.find({ boardId: req.params.boardId }) 
                 .then(lists => {
                     res.send(handleResponse(action, lists))
                 }).catch(error => {
@@ -43,7 +25,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find specific list in Lists'
-            Lists.findById(req.params.listId) //in Lists, find all boards with boardIdxxx
+            Lists.findById(req.params.listId)
                 .then(list => {
                     res.send(handleResponse(action, list))
                 }).catch(error => {
@@ -57,7 +39,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find all Tasks of one list'
-            Tasks.find({ listId: req.params.listId }) //in Lists, find all boards with boardIdxxx
+            Tasks.find({ listId: req.params.listId }) 
                 .then(tasks => {
                     res.send(handleResponse(action, tasks))
                 }).catch(error => {
@@ -71,7 +53,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find a specific Task'
-            Tasks.findById(req.params.taskId) //in Lists, find all boards with boardIdxxx
+            Tasks.findById(req.params.taskId) 
                 .then(task => {
                     res.send(handleResponse(action, task))
                 }).catch(error => {
@@ -85,7 +67,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find all Comments of a specific task' //No Comment :)
-            Comments.find({ taskId: req.params.taskId }) //in Lists, find all boards with boardIdxxx
+            Comments.find({ taskId: req.params.taskId }) 
                 .then(comments => {
                     res.send(handleResponse(action, comments))
                 }).catch(error => {
@@ -100,7 +82,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find a specific comment' //No Comment :)
-            Comments.findById(req.params.commentId) //in Lists, find all boards with boardIdxxx
+            Comments.findById(req.params.commentId) 
                 .then(comment => {
                     res.send(handleResponse(action, comment))
                 }).catch(error => {
@@ -108,13 +90,6 @@ module.exports = {
                 })
         }
     },
-
-    //path: '/boards/:boardId/lists/:listId/tasks'
-    //path: '/boards/:boardId/lists/:listId/tasks/:taskId'
-    //path: '/boards/:boardId/lists/:listId/tasks/:taskId/Comments'
-    //path: '/boards/:boardId/lists/:listId/tasks/:taskId/Comments/commentId'
-
-
 
     sharedLists: {
         path: '/sharedLists',
