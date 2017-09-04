@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
   creatorName: { type: String, required: true },
   creatorId: { type: ObjectId, ref: models.user.name, required: true },
 
-  //collaborators: [{type: ObjectId, ref: models.user.name}]
+  // collaborators: [{type: ObjectId, ref: models.user.name}]
 });
 
 module.exports = mongoose.model(models.board.name, schema);
