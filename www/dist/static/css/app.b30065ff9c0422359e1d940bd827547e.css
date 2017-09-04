@@ -2,6 +2,24 @@
 * {
   /* border: 1px solid white; */
 }
+.center1 {
+  display:inline-block;
+  text-align: center;
+}
+h3 {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  opacity: .6;
+  width: 700px;
+  text-align: center;
+}
+h5 {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  opacity: .6;
+  width: 700px;
+  text-align: center;
+}
 .dropdown-menu {
   background-color: black;
   color: white;
@@ -18,10 +36,6 @@ input {
   color: black;
   border-radius: 10px;
   padding: 5px;
-}
-.center1 {
-  text-align: center;
-  margin: 0;
 }
 body {
   background-image: url(/static/img/workspace.94bd840.jpg);
@@ -161,6 +175,18 @@ input[data-v-0c6e3af6] {
   border-radius: 10px;
 }
 
+.center1[data-v-5337eb44] {
+  display: inline-block;
+  text-align: center;
+}
+h6[data-v-5337eb44] {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  opacity: .6;
+  width: 300px;
+  text-align: center;
+  padding: 10px, 5px, 0, 5px;
+}
 .creator[data-v-5337eb44] {
   font-size: 10px;
 }
@@ -346,4 +372,4 @@ button[data-v-17721eac] {
   float: left;
 }
 
-/*# sourceMappingURL=app.23ed661c7601e30737729ef3272354de.css.map*/
+/*# sourceMappingURL=app.b30065ff9c0422359e1d940bd827547e.css.map*/
