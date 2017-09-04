@@ -84,15 +84,18 @@
       </nav>
     </div>
 
-    <error></error>
+    <!-- <error></error> -->
 
     <div class="center1">
+
       <h3>
         Vue-Kanban lets you work more efficiently and effectively <br/>so you and your team can get more done.
       </h3>
 
+
       <h5>
-        Vue-Kanban’s structure using boards, lists, task-cards and comment-cards enable you to manage your projects<br/>        easily while enjoying the time-freedom and flexibility that only Vue-Kanban provides!
+        Vue-Kanban’s structure using boards, lists, task and comment-cards enable you to manage your projects easily<br/> 
+         while enjoying the time-freedom and flexibility that only Vue-Kanban provides!
       </h5>
     </div>
 
@@ -153,6 +156,27 @@
     /* border: 1px solid white; */
   }
 
+  .center1 {
+    display:inline-block;
+    text-align: center;
+  }
+
+  h3 {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    opacity: .6;
+    width: 700px;
+    text-align: center;
+  }
+
+  h5 {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    opacity: .6;
+    width: 700px;
+    text-align: center;
+  }
+
   .dropdown-menu {
     background-color: black;
     color: white;
@@ -173,10 +197,7 @@
     padding: 5px;
   }
 
-  .center1 {
-    text-align: center;
-    margin: 0;
-  }
+
 
   body {
     background-image: url("./images/workspace.jpg");

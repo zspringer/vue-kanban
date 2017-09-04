@@ -7,6 +7,7 @@
       <div class="special">
         <input type="text" placeholder="name" v-model="newboard.name">
         <input type="text" placeholder="description" v-model="newboard.description">
+        <!-- maybe collaborator stuff goes here -->
         <button type="submit" class="btn" @click="createBoard">Create</button>
       </div>
     </div>
@@ -45,6 +46,7 @@
           name: '',
           description: '',
           creatorName: ''
+
         }
       }
     },

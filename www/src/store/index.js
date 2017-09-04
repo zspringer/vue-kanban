@@ -57,6 +57,10 @@ var store = new vuex.Store({
     setActiveBoard(state, data) {
       state.activeBoard = data
     },
+    
+    // setSharedBoards(state, data) {
+    //   state.activeBoard.push(data)
+    // },
 
     handleError(state, err) {
       state.error = err
@@ -76,6 +80,17 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
+    // getSharedBoards({ commit, dispatch }) {
+    //   api('sharedBoards')
+    //     .then(res => {
+    //       //console.log(res)
+    //       commit('setBoards', res.data.data)
+    //     })
+    //     .catch(err => {
+    //       commit('handleError', err)
+    //     })
+    // },
 
     getLists({ commit, dispatch }, id) {
       api('/boards/' + id + '/lists')

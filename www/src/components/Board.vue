@@ -1,10 +1,13 @@
 <template>
   <div class="wholeThing">
 
-    Active Board: {{board.name}}
-    <br> Board Description: {{board.description}}
-    <p class="creator">Created by: {{board.creatorName}}</p>
-
+    <div class="center1">
+      <h6>
+        Active Board: {{board.name}}
+        <br> Board Description: {{board.description}}
+        <p class="creator">Created by: {{board.creatorName}}</p>
+      </h6>
+    </div>
     <div>
       <button @click="showListCreate">Add List</button>
       <div v-if="listCreate" class="row">
@@ -85,6 +88,20 @@
 </script>
 
 <style scoped>
+  .center1 {
+    display: inline-block;
+    text-align: center;
+  }
+
+  h6 {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    opacity: .6;
+    width: 300px;
+    text-align: center;
+    padding: 10px, 5px, 0, 5px;
+  }
+
   .creator {
     font-size: 10px;
   }
