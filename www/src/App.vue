@@ -180,14 +180,17 @@
 
   body {
     background-image: url("./images/workspace.jpg");
-    text-align: center;
+    /* text-align: center; */
+    background-position: center;
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-color: gray;
+    background-color: black;
     margin: auto;
-    color: black;
+    color: white;
+    height: 100%;
   }
 
   #app {
