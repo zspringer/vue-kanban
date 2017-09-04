@@ -25,11 +25,14 @@ input {
 }
 body {
   background-image: url(/static/img/workspace.94bd840.jpg);
-  text-align: center;
+  /* text-align: center; */
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-color: gray;
+  background-color: black;
   margin: auto;
-  color: black;
+  color: white;
+  height: 100%;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -343,4 +346,4 @@ button[data-v-17721eac] {
   float: left;
 }
 
-/*# sourceMappingURL=app.506168cd27a3275a25d412cd5254fa11.css.map*/
+/*# sourceMappingURL=app.23ed661c7601e30737729ef3272354de.css.map*/
